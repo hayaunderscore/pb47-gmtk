@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq0kve0q372an"]
+
+[ext_resource type="Texture2D" uid="uid://ds577norycodu" path="res://gfx/outside_bg.png" id="1_emqu7"]
+
+[node name="Parallax2D" type="Parallax2D"]
+scroll_scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_emqu7")
+centered = false
+offset = Vector2(0, 320)
+region_enabled = true
+region_rect = Rect2(-100000, 0, 100000, 703)

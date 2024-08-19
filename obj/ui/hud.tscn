@@ -1,0 +1,128 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1uaoii224v8c"]
+
+[ext_resource type="Script" path="res://scripts/musname.gd" id="1_dsndi"]
+[ext_resource type="FontFile" uid="uid://dppkxyghcgsrc" path="res://gfx/fon/monogram-extended.ttf" id="2_y2nyg"]
+[ext_resource type="Texture2D" uid="uid://egv0dwxy65qu" path="res://gfx/bliggy/heartslmao.png" id="3_eb367"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tttv2"]
+atlas = ExtResource("3_eb367")
+region = Rect2(428, 0, 107, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqfsc"]
+atlas = ExtResource("3_eb367")
+region = Rect2(321, 0, 107, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr0cq"]
+atlas = ExtResource("3_eb367")
+region = Rect2(214, 0, 107, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bplqq"]
+atlas = ExtResource("3_eb367")
+region = Rect2(107, 0, 107, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2572"]
+atlas = ExtResource("3_eb367")
+region = Rect2(0, 0, 107, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r41sh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tttv2")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqfsc")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr0cq")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bplqq")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2572")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_dsndi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -128.0
+offset_right = 160.0
+offset_bottom = 32.0
+color = Color(0, 0, 0, 0.360784)
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_right = 752.0
+offset_bottom = 128.0
+theme_override_fonts/normal_font = ExtResource("2_y2nyg")
+theme_override_font_sizes/normal_font_size = 32
+text = "mus: akrillic - plok!"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_r41sh")
+animation = &"2"
+centered = false
+
+[node name="CheckpointText" type="RichTextLabel" parent="."]
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -96.0
+offset_right = 192.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_y2nyg")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]checkpoint get!"
+fit_content = true
+
+[node name="CheckpointTextTime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="CheckpointTextTime" to="." method="_on_checkpoint_text_time_timeout"]

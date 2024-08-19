@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://doo31d8kwed6b"]
+
+[ext_resource type="Script" path="res://scripts/game/enemies/bloop.gd" id="1_cr62f"]
+[ext_resource type="Texture2D" uid="uid://caq3bj7nygyy" path="res://gfx/misc_ent.png" id="2_askfw"]
+[ext_resource type="AudioStream" uid="uid://8sryqafrwcst" path="res://sfx/bloopScream.wav" id="3_45ewe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0ur8"]
+atlas = ExtResource("2_askfw")
+region = Rect2(220, 0, 55, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elurt"]
+atlas = ExtResource("2_askfw")
+region = Rect2(275, 0, 55, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjwn1"]
+atlas = ExtResource("2_askfw")
+region = Rect2(165, 0, 55, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmsqu"]
+atlas = ExtResource("2_askfw")
+region = Rect2(55, 0, 55, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gei1"]
+atlas = ExtResource("2_askfw")
+region = Rect2(110, 0, 55, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vjyi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0ur8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elurt")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjwn1")
+}],
+"loop": true,
+"name": &"Evil Grin",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmsqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gei1")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dg55u"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmudc"]
+size = Vector2(16, 16)
+
+[node name="Bloop" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_cr62f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_vjyi2")
+animation = &"Walk"
+frame_progress = 0.818927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dg55u")
+
+[node name="Dir" type="Node2D" parent="."]
+
+[node name="FloorCheck" type="RayCast2D" parent="Dir"]
+position = Vector2(16, 16)
+exclude_parent = false
+target_position = Vector2(0, 24)
+collision_mask = 5
+hit_from_inside = true
+
+[node name="WallCheck" type="RayCast2D" parent="Dir"]
+position = Vector2(16, 0)
+target_position = Vector2(32, 0)
+collision_mask = 5
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_45ewe")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fmudc")
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

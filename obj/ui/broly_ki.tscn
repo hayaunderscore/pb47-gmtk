@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv581c1fmambf"]
+
+[ext_resource type="Shader" path="res://shader/brolyki.gdshader" id="1_d51xo"]
+[ext_resource type="Texture2D" uid="uid://biwwo6nyy1x1v" path="res://gfx/bliggy/brolyki.png" id="2_f4a6p"]
+[ext_resource type="Script" path="res://obj/ui/broly_ki.gd" id="3_errax"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38foo"]
+shader = ExtResource("1_d51xo")
+
+[node name="BrolyKi" type="Sprite2D"]
+z_index = 4096
+texture_filter = 1
+material = SubResource("ShaderMaterial_38foo")
+scale = Vector2(20, 20)
+texture = ExtResource("2_f4a6p")
+script = ExtResource("3_errax")

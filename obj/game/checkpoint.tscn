@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqxlvmk0wy1fv"]
+
+[ext_resource type="Script" path="res://obj/game/checkpoint.gd" id="1_78134"]
+[ext_resource type="Texture2D" uid="uid://ce6ru8wakahh4" path="res://gfx/checkpoint.png" id="1_evra4"]
+[ext_resource type="AudioStream" uid="uid://db2jura23qp8p" path="res://sfx/checkpoint.wav" id="3_ldc25"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jybf6"]
+atlas = ExtResource("1_evra4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvkgm"]
+atlas = ExtResource("1_evra4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6bxsf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jybf6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvkgm")
+}],
+"loop": true,
+"name": &"Loop",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqwu7"]
+size = Vector2(16, 16)
+
+[node name="Checkpoint" type="Area2D"]
+z_index = -1
+script = ExtResource("1_78134")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6bxsf")
+animation = &"Loop"
+autoplay = "Loop"
+frame_progress = 0.500488
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sqwu7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ldc25")
+volume_db = 5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
