@@ -1,16 +1,9 @@
-# Godot Scene Manager
+# PLANT BRAWL 47
 
-![Logo](/logo.png)
+A game submitted for the [GMTK Game Jam 2024](https://itch.io/jam/gmtk-2024).
 
-Plugin for managing transitions and Node references between scenes. Expect more features to be added in the future!
+Domu stole your 5 dollars, and now you need to get it back.
 
-![Demonstration of Shader Fades](/scene_manager_demo.gif)
+# License?
 
----
-
-All the README info has been moved to the new wiki!
-
-- [Wiki](https://github.com/glass-brick/Scene-Manager/wiki)
-  - [Getting Started](https://github.com/glass-brick/Scene-Manager/wiki/Getting-started)
-  - [Features](https://github.com/glass-brick/Scene-Manager/wiki/Features)
-  - [API docs](<https://github.com/glass-brick/Scene-Manager/wiki/API-(Godot-4)>)
+Licensed under MIT.
