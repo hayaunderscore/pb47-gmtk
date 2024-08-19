@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhv00i7g84t83"]
+
+[ext_resource type="Script" path="res://obj/lvl/credits.gd" id="1_bwc5q"]
+[ext_resource type="FontFile" uid="uid://26c42g3tntmq" path="res://gfx/fon/monogram-extended-italic.ttf" id="1_dero3"]
+[ext_resource type="AudioStream" uid="uid://c6y8d75ahce0l" path="res://mus/resting.ogg" id="4_5pfha"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bwc5q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 4712.0
+theme_override_fonts/normal_font = ExtResource("1_dero3")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]
+
+
+
+
+
+
+
+
+
+
+
+
+YOU DID IT!
+
+
+You have defeated Domu, and got your
+five dollars back.
+
+
+As you walk away from the menacing
+tower, a chill runs through your body.
+
+
+
+
+
+PLANT BRAWL 47
+CREDITS
+
+a game by
+haya
+komalose
+
+
+
+
+
+music from:
+Akrillic - Plok!
+Divine Breath - Tower of Heaven
+Peaceful - Touhou 04
+
+
+
+
+
+sounds from:
+perkristan's doom hq sfx pack
+freesounds.org
+
+
+
+
+
+special thanks:
+achii
+tetrakanyx
+ari
+all pearltopians
+
+... and YOU!
+
+
+
+
+
+thanks for playing!
+
+
+
+
+
+
+uhhhh..... you can close the game now.
+
+
+
+
+
+what else are you looking for?"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5pfha")
+volume_db = -10.0
+autoplay = true

@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var domumus = preload("res://mus/domu.ogg")
+
 func _ready() -> void:
 	$Tiles/Outside.modulate.a = 0
 	
@@ -18,3 +20,10 @@ func _on_outside_shown_body_entered(body: Node2D) -> void:
 func _on_outside_shown_body_exited(body: Node2D) -> void:
 	if body is Bliggy:
 		outalpha = 0
+
+var changed = false
+func _on_changemoosic_body_entered(body: Node2D) -> void:
+	if body is Bliggy:
+		changed = true
+		$AudioStreamPlayer.stream = domumus
+		$AudioStreamPlayer.play()

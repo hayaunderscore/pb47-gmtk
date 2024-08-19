@@ -7,9 +7,11 @@ var dir = 1
 var dead = false
 var nyeyehehe = false
 
-func _process(delta):
+func _physics_process(delta):
 	if dead || nyeyehehe:
 		return
+	#if not is_on_floor():
+	#	velocity += get_gravity() * delta
 	$AnimatedSprite2D.play("Walk")
 	velocity.x = fella_speed * dir
 	# Switch directions
