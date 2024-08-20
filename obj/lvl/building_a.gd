@@ -25,5 +25,13 @@ var changed = false
 func _on_changemoosic_body_entered(body: Node2D) -> void:
 	if body is Bliggy:
 		changed = true
-		$AudioStreamPlayer.stream = domumus
-		$AudioStreamPlayer.play()
+		$CanvasLayer/Music.stream = domumus
+		$CanvasLayer/Music.play()
+
+var speedrun_started = false
+func _on_start_speedrun_body_entered(body: Node2D) -> void:
+	if speedrun_started:
+		return
+	if body is Bliggy:
+		speedrun_started = true
+		body.hud.speedrunTimer = true

@@ -18,6 +18,9 @@ var health = 4
 var cur_checkpoint : Vector2
 var checkpoint_msg = 0
 
+@onready var brolyki = preload("res://obj/ui/broly_ki.tscn")
+@onready var explosion = preload("res://obj/game/explosion_dummy.tscn")
+
 func _ready():
 	cur_checkpoint = global_position
 
@@ -135,14 +138,14 @@ func _physics_process(delta: float) -> void:
 				velocity.x = gundir_x * SPEED*3.5
 			velocity.y = JUMP_VELOCITY
 			jumptime.stop()
-		elif facing < 0 && $leftcheck.is_colliding():
+		elif gundir_y <= 0 && facing < 0 && $leftcheck.is_colliding():
 			velocity.x = SPEED*mul
 			if is_on_floor():
 				velocity.y = JUMP_VELOCITY/2
 			else:
 				velocity.y = JUMP_VELOCITY/1.25
 			jumptime.stop()
-		elif facing > 0 && $rightcheck.is_colliding():
+		elif gundir_y <= 0 && facing > 0 && $rightcheck.is_colliding():
 			velocity.x = -SPEED*mul
 			if is_on_floor():
 				velocity.y = JUMP_VELOCITY/2
@@ -154,8 +157,9 @@ func _physics_process(delta: float) -> void:
 			jumptime.stop()
 		coyote.stop()
 		
-	if Input.is_action_pressed("ui_accept"):
-		die()
+	# This was originally here for debugging purposes.
+	# if Input.is_action_pressed("ui_accept"):
+	# 	die()
 			
 	last_floor = is_on_floor()
 	move_and_slide()
@@ -181,12 +185,12 @@ func die():
 	if hud:
 		hud.change_health(health)
 	$AnimatedSprite2D.play("Dead")
-	add_child(load("res://obj/ui/broly_ki.tscn").instantiate())
+	add_child(brolyki.instantiate())
 	$Sounds/sonic.play()
 	$DeathTime1.start()
 
 func _on_death_time_1_timeout() -> void:
-	var expl = preload("res://obj/game/explosion_dummy.tscn").instantiate()
+	var expl = explosion.instantiate()
 	expl.global_position = global_position
 	expl.get_node("AudioStreamPlayer2D").stream = preload("res://sfx/bloopExplode2.wav")
 	expl.speed_scale = 0.25

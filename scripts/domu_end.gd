@@ -35,6 +35,7 @@ func _on_timer_timeout() -> void:
 	expl.get_node("AudioStreamPlayer2D").stream = preload("res://sfx/bloopExplode2.wav")
 	get_parent().add_child(expl)
 	visible = false
+	get_parent().get_parent().get_node("CanvasLayer").speedrunTimer = false
 	$Timer4.start()
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:

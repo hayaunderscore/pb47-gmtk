@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		shake()
 
 func _check_face():
-	var new = sign(get_screen_center_position().x - prev.x)
+	var new = get_parent().facing
 	if new != 0 && face != new:
 		face = new
 		var target_offset = get_viewport_rect().size.x * LOOK_FACTOR * face

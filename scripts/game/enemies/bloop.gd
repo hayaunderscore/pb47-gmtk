@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-const fella_speed = 150
+const fella_speed = 100
 var dir = 1
 
 var dead = false

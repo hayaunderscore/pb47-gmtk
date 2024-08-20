@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/resting.ogg-7c0fee5c8f8cc0a47bb757e0bcfa879a.
 [params]
 
 loop=true
-loop_offset=0.0
+loop_offset=0.768
 bpm=0.0
 beat_count=0
 bar_beats=4

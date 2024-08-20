@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://djbnbhm2ojwgm"]
+
+[ext_resource type="Script" path="res://scripts/anchovy.gd" id="1_xfy7m"]
+[ext_resource type="Texture2D" uid="uid://7t8u3cm084he" path="res://gfx/anchovy-Sheet.png" id="2_nun34"]
+[ext_resource type="AudioStream" uid="uid://8sryqafrwcst" path="res://sfx/bloopScream.wav" id="3_v7oxf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2d3x"]
+atlas = ExtResource("2_nun34")
+region = Rect2(174, 0, 87, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weqti"]
+atlas = ExtResource("2_nun34")
+region = Rect2(0, 0, 87, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w34b"]
+atlas = ExtResource("2_nun34")
+region = Rect2(87, 0, 87, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kmva6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2d3x")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weqti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w34b")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fl8a"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wn2w"]
+size = Vector2(16, 16)
+
+[node name="Anchovy" type="CharacterBody2D"]
+z_index = -10
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_xfy7m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_kmva6")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8fl8a")
+
+[node name="Dir" type="Node2D" parent="."]
+
+[node name="FloorCheck" type="RayCast2D" parent="Dir"]
+position = Vector2(16, 16)
+exclude_parent = false
+target_position = Vector2(0, 24)
+collision_mask = 5
+hit_from_inside = true
+
+[node name="WallCheck" type="RayCast2D" parent="Dir"]
+position = Vector2(16, 0)
+target_position = Vector2(32, 0)
+collision_mask = 5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v7oxf")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8wn2w")
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

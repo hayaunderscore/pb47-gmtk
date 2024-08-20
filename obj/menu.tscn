@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://ba8vqaa8rpngd"]
+
+[ext_resource type="Script" path="res://obj/menu.gd" id="1_nwhs6"]
+[ext_resource type="Texture2D" uid="uid://ekplnxgltyux" path="res://gfx/titlebg2.png" id="1_ussk7"]
+[ext_resource type="Script" path="res://scripts/titlebg_2.gd" id="2_0vauk"]
+[ext_resource type="AudioStream" uid="uid://beupo3tlwuo4m" path="res://sfx/pb5_select.wav" id="3_xd6ja"]
+[ext_resource type="AudioStream" uid="uid://c21kllgpan841" path="res://sfx/pb5_hover.wav" id="4_i8aru"]
+[ext_resource type="Texture2D" uid="uid://c3tfb7xioxrwm" path="res://gfx/title.png" id="6_lvxxg"]
+[ext_resource type="FontFile" uid="uid://dppkxyghcgsrc" path="res://gfx/fon/monogram-extended.ttf" id="7_4pc7c"]
+[ext_resource type="Shader" path="res://obj/ui/hud.gdshader" id="7_n0h7c"]
+[ext_resource type="Texture2D" uid="uid://dfavsdi27t3xc" path="res://gfx/tutoral.png" id="9_6es2m"]
+[ext_resource type="Texture2D" uid="uid://cjc3y8a7q7b3a" path="res://gfx/titlebumper.png" id="9_f8s42"]
+[ext_resource type="Texture2D" uid="uid://ddcxvn2n1juf7" path="res://gfx/riemenu_idle1.png" id="10_2j5u5"]
+[ext_resource type="Texture2D" uid="uid://csutc17hjpwa8" path="res://gfx/riemenu_idle2.png" id="11_4ghyy"]
+[ext_resource type="Script" path="res://addons/papershot/papershot.gd" id="13_gd4d3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3g14"]
+shader = ExtResource("7_n0h7c")
+shader_parameter/top = true
+shader_parameter/left = true
+shader_parameter/right = true
+shader_parameter/bottom = true
+shader_parameter/topleft = true
+shader_parameter/topright = true
+shader_parameter/bottomleft = true
+shader_parameter/bottomright = true
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/inside = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dk8jt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_f8s42")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6mv0o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_2j5u5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4ghyy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="InputEventAction" id="InputEventAction_3gw0j"]
+action = &"game_screenshot"
+
+[sub_resource type="Shortcut" id="Shortcut_5xl3f"]
+events = [SubResource("InputEventAction_3gw0j")]
+
+[node name="Menu" type="Node"]
+script = ExtResource("1_nwhs6")
+
+[node name="Titlebg2" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("1_ussk7")
+centered = false
+region_enabled = true
+region_rect = Rect2(-1e+06, -1e+06, 1e+07, 1e+07)
+script = ExtResource("2_0vauk")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Select" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_xd6ja")
+
+[node name="Hover" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_i8aru")
+
+[node name="TitleHover" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="TitleHover"]
+texture_filter = 1
+position = Vector2(576, 192)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("6_lvxxg")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TitleHover"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_c3g14")
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 616.0
+offset_right = 360.0
+offset_bottom = 666.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+theme_override_fonts/normal_font = ExtResource("7_4pc7c")
+text = " v1.0 [GMTK 2024 Build]"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TitleHover"]
+texture_filter = 1
+position = Vector2(576, 544)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_dk8jt")
+autoplay = "default"
+
+[node name="Tutoral" type="Node2D" parent="."]
+visible = false
+
+[node name="Tutoral2" type="Sprite2D" parent="Tutoral"]
+texture_filter = 3
+position = Vector2(576, 320)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("9_6es2m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tutoral"]
+visible = false
+texture_filter = 1
+position = Vector2(848, 552)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6mv0o")
+autoplay = "default"
+
+[node name="Papershot" type="Node" parent="."]
+script = ExtResource("13_gd4d3")
+folder = "res://screenshots/"
+shortcut = SubResource("Shortcut_5xl3f")
+file_format = 1

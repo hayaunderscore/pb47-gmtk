@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhv00i7g84t83"]
+[gd_scene load_steps=6 format=3 uid="uid://bhv00i7g84t83"]
 
 [ext_resource type="Script" path="res://obj/lvl/credits.gd" id="1_bwc5q"]
 [ext_resource type="FontFile" uid="uid://26c42g3tntmq" path="res://gfx/fon/monogram-extended-italic.ttf" id="1_dero3"]
 [ext_resource type="AudioStream" uid="uid://c6y8d75ahce0l" path="res://mus/resting.ogg" id="4_5pfha"]
+[ext_resource type="Texture2D" uid="uid://c8w50l736ajqs" path="res://gfx/crediticon1.png" id="4_daac8"]
+[ext_resource type="Texture2D" uid="uid://cwnx2e4yilrnv" path="res://gfx/crediticon2.png" id="5_nxjup"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -20,9 +22,10 @@ offset_bottom = 648.0
 color = Color(0, 0, 0, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+texture_filter = 1
 layout_mode = 0
 offset_right = 1152.0
-offset_bottom = 4712.0
+offset_bottom = 5984.0
 theme_override_fonts/normal_font = ExtResource("1_dero3")
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
@@ -65,9 +68,10 @@ komalose
 
 
 music from:
-Akrillic - Plok!
+Akrillic (Restored) - Plok! 
+(restoration by senn)
 Divine Breath - Tower of Heaven
-Peaceful - Touhou 04
+Days - Touhou Gensoukyou ~ Lotus Land Story
 
 
 
@@ -77,6 +81,13 @@ sounds from:
 perkristan's doom hq sfx pack
 freesounds.org
 
+
+
+
+
+various grapchis:
+monogram
+GameMaker
 
 
 
@@ -100,13 +111,45 @@ thanks for playing!
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 uhhhh..... you can close the game now.
 
 
 
 
 
+
+
+
+
+
+
+
+
+
 what else are you looking for?"
+scroll_active = false
+
+[node name="Crediticon1" type="Sprite2D" parent="ColorRect/RichTextLabel"]
+texture_filter = 1
+position = Vector2(672, 1640)
+texture = ExtResource("4_daac8")
+
+[node name="Crediticon2" type="Sprite2D" parent="ColorRect/RichTextLabel"]
+texture_filter = 1
+position = Vector2(712, 1696)
+texture = ExtResource("5_nxjup")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_5pfha")
